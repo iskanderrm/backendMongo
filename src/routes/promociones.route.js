@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../middlewares/imagenes.middleware');
-
+const authMiddleware = require('../middlewares/auth.middleware');
 const {
   createPromocion,
   updatePromocion,

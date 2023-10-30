@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const promocionesSchema = mongoose.Schema({
     id_nombre_promocion: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     url_imagen_promocion: {
         type: String,
