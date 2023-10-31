@@ -8,7 +8,8 @@ const {
   updateProducto,
   deleteProducto,
   getProducto,
-  getProductos
+  getProductos,
+  getCategoria
 } = require('../controllers/productos.controller'); 
 
 router.post('/', authMiddleware.verificarJWT, multerMiddleware.single('imagen'), createProducto);
@@ -19,6 +20,8 @@ router.delete('/:codigo', authMiddleware.verificarJWT, deleteProducto);
 
 router.get('/:codigo', authMiddleware.verificarJWT, getProducto);
 router.get('/', getProductos);
+router.get('/categorias/:categoria', getCategoria);
+
 
 
 

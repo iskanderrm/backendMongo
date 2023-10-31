@@ -18,7 +18,7 @@ const productosData = [
     modelo: 'Modelo 2',
     marca: 'Marca 2',
     url_imagen: 'imagen2.jpg',
-    tipo_producto: { atributo1: 'Valor3', atributo2: 'Valor4' },
+    tipo_producto: { categoria: 'Maletas', atributo2: 'Valor4' },
     created_by: "admin"
   },
   {
@@ -26,7 +26,7 @@ const productosData = [
     modelo: 'Modelo 3',
     marca: 'Marca 3',
     url_imagen: 'imagen3.jpg',
-    tipo_producto: { atributo1: 'Valor5', atributo2: 'Valor6' },
+    tipo_producto: { categoria: 'Maletas', atributo2: 'Valor6' },
     created_by: "admin"
   },
   {
@@ -34,7 +34,7 @@ const productosData = [
     modelo: 'Modelo 4',
     marca: 'Marca 4',
     url_imagen: 'imagen4.jpg',
-    tipo_producto: { atributo1: 'Valor7', atributo2: 'Valor8' },
+    tipo_producto: { categoria: 'Cascos', atributo2: 'Valor8' },
     created_by: "admin"
   },
   {
@@ -42,7 +42,7 @@ const productosData = [
     modelo: 'Modelo 5',
     marca: 'Marca 5',
     url_imagen: 'imagen5.jpg',
-    tipo_producto: { atributo1: 'Valor9', atributo2: 'Valor10' },
+    tipo_producto: { categoria: 'Cascos', atributo2: 'Valor10' },
     created_by: "admin",
   },
 ];
