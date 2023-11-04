@@ -7,7 +7,7 @@ const verificarJWT = (req, res, next) => {
     jwt.verify(token, jwtSecret, (err, decode) => {
         if (err) {
             return res.status(401).send({
-                message: "error al validar token",
+                message: "Error al validar token",
                 error: err.message
             });
         }

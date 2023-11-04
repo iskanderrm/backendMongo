@@ -3,15 +3,11 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Usuario = require('../models/usuarios.model');
-// const url_mongo = process.env.URL_MONGODB;                   No sirvió
-// const saltosBcrypt = parseInt(process.env.SALTOS_BCRYPT);    Tampoco sirvió
-
-const url_mongo = "mongodb://127.0.0.1:27017/motomania";
-const saltosBcrypt = 10;
+const url_mongo = process.env.URL_MONGODB;                 
+const saltosBcrypt = parseInt(process.env.SALTOS_BCRYPT);  
 
 mongoose.connect(url_mongo, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log("Conectado a MongoDB");
     seedUsuarios();
   })
   .catch(console.error);

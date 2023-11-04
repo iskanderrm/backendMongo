@@ -83,7 +83,7 @@ exports.updateUser = async (req, res) => {
     if (nombre) usuario.nombre = nombre;
     if (apellido) usuario.apellido = apellido;
     if (password) {
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, process.env.SALTOS_BCRYPT);
       usuario.password = hashedPassword;
     }
 
@@ -101,7 +101,7 @@ exports.updateUser = async (req, res) => {
 // Actualización del usuario solo de forma logica
 exports.deleteUser = async (req, res) => {
   try {
-    //Se recibe el usuario y quien eliminó por parametros
+    //Se recibe el usuario y quien eliminó por la URL
     const { username, deletedBy } = req.params;
 
     const usuario = await Usuario.findOne({ usuario: username, deleted: false });

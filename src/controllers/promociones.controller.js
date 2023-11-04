@@ -1,12 +1,13 @@
 const Promocion = require('../models/promociones.model');
 const fs = require('fs');
+
 const createPromocion = async (req, res) => {
   try {
     const { id_nombre_promocion, created_by } = req.body;
     const url_imagen_promocion = req.file.filename; 
-    const existingUser = await Promocion.findOne({ id_nombre_promocion });
+    const existigPromotion = await Promocion.findOne({ id_nombre_promocion });
 
-    if (existingUser) {
+    if (existigPromotion) {
       res.status(400).json({ message: 'ID de la promoción no disponible' });
       return;
     }
@@ -47,7 +48,6 @@ const updatePromocion = async (req, res) => {
 
     res.status(200).json({message: "Promoción actualizada correctamente"});
   } catch (error) {
-    console.log(error)
     res.status(500).json({ error: 'Error al actualizar la promoción.' });
   }
 };
