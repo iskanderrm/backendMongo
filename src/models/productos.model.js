@@ -21,11 +21,53 @@ const productosSchema = mongoose.Schema({
         required: true,
         default: null
       },
-      tipo_producto: {
-        type: Object,
+      //---------------------
+      categoria: {
+        type: String,
         required: true,
         default: null,
       },
+      talla: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      capacidad: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      tipo_llanta: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      rin: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      medida: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      descripcion: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      compatibilidad: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      color: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      //---
       created_at: {
         type: Date,
         required: false,

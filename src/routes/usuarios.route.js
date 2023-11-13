@@ -9,6 +9,6 @@ router.post('/', authMiddleware.verificarJWT, usuariosController.createUser);
 router.get('/', authMiddleware.verificarJWT, usuariosController.getAllUsers);
 router.get('/:username', authMiddleware.verificarJWT, usuariosController.getUserByUsername);
 router.put('/:username', authMiddleware.verificarJWT, usuariosController.updateUser);
-router.delete('/:username/:deletedBy', authMiddleware.verificarJWT, usuariosController.deleteUser);
+router.delete('/:username', authMiddleware.verificarJWT, usuariosController.deleteUser);
 
 module.exports = router;

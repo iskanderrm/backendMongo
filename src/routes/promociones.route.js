@@ -14,7 +14,7 @@ router.post('/', authMiddleware.verificarJWT, upload.single('imagen'), createPro
 
 router.put('/:id_nombre_promocion', authMiddleware.verificarJWT, upload.single('imagen'), updatePromocion);
 
-router.delete('/:id_nombre_promocion/:deleted_by', authMiddleware.verificarJWT, deletePromocion);
+router.delete('/:id_nombre_promocion', authMiddleware.verificarJWT, deletePromocion);
 
 router.get('/:id_nombre_promocion', authMiddleware.verificarJWT, getPromocion);
 

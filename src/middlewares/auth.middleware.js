@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
-const jwtSecret = 'motomania';
+require("dotenv").config();
+const jwtSecret = process.env.JWT_SECRET;
+
 
 const verificarJWT = (req, res, next) => {
     const token = req.get('Authorization');

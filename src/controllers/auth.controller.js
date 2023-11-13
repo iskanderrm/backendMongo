@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const usuarioModel = require('../models/usuarios.model');
+const jwtSecret = process.env.JWT_SECRET;
 
 const login = async (req, res) => {
     try {
@@ -25,8 +26,7 @@ const login = async (req, res) => {
                 usuario: usuarioEncontrado.usuario
             }
         }
-
-        const token = jwt.sign(payload, 'motomania', {expiresIn: '2h'});
+        const token = jwt.sign(payload, jwtSecret, {expiresIn: '2h'});
 
         return res.status(200).json({
             message: "Acceso correcto",

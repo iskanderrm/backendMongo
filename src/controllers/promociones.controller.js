@@ -3,10 +3,10 @@ const fs = require('fs');
 
 const createPromocion = async (req, res) => {
   try {
-    const { id_nombre_promocion, created_by } = req.body;
+    const { id_nombre_promocion } = req.body;
     const url_imagen_promocion = req.file.filename; 
     const existigPromotion = await Promocion.findOne({ id_nombre_promocion });
-
+    const created_by = req.usuario.usuario;
     if (existigPromotion) {
       res.status(400).json({ message: 'ID de la promoción no disponible' });
       return;
@@ -29,7 +29,7 @@ const createPromocion = async (req, res) => {
 const updatePromocion = async (req, res) => {
   try {
     const { id_nombre_promocion } = req.params;
-    const { updated_by } = req.body;
+    const { updated_by } = req.usuario.usuario;
     
 
     const promocion = await Promocion.findOne({ id_nombre_promocion, deleted: false });
@@ -54,8 +54,8 @@ const updatePromocion = async (req, res) => {
 
 const deletePromocion = async (req, res) => {
   try {
-    const { id_nombre_promocion, deleted_by} = req.params;
-
+    const { id_nombre_promocion } = req.params;
+    const deleted_by = req.usuario.usuario;
     const promocion = await Promocion.findOne({ id_nombre_promocion, deleted: false });
 
     if (!promocion) {

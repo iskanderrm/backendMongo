@@ -5,9 +5,9 @@ const saltosBcrypt = parseInt(process.env.SALTOS_BCRYPT);
 //Creación de nuevos administradores
 exports.createUser = async (req, res) => {
   try {
-    const { nombre, apellido, usuario, password, createdBy } = req.body;
+    const { nombre, apellido, usuario, password } = req.body;
     const existingUser = await Usuario.findOne({ usuario });
-
+    const createdBy = req.usuario.usuario;
     if (existingUser) {
       res.status(400).json({ message: 'Nombre de usuario no disponible' });
       return;
@@ -71,7 +71,8 @@ exports.updateUser = async (req, res) => {
   try {
     //Por parametro en la URL se manda el usuario y lo que se va a actualizar se recibe del body.
     const { username } = req.params;
-    const { nombre, apellido, password, updatedBy } = req.body;
+    const { nombre, apellido, password } = req.body;
+    const updatedBy = req.usuario.usuario;
 
     const usuario = await Usuario.findOne({ usuario: username, deleted: false });
 
@@ -83,7 +84,7 @@ exports.updateUser = async (req, res) => {
     if (nombre) usuario.nombre = nombre;
     if (apellido) usuario.apellido = apellido;
     if (password) {
-      const hashedPassword = await bcrypt.hash(password, process.env.SALTOS_BCRYPT);
+      const hashedPassword = await bcrypt.hash(password, parseInt(process.env.SALTOS_BCRYPT));
       usuario.password = hashedPassword;
     }
 
@@ -94,15 +95,15 @@ exports.updateUser = async (req, res) => {
 
     res.status(200).json({ message: "Usuario actualizado exitosamente."});
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Error al actualizar el usuario' });
   }
 };
 
-// Actualización del usuario solo de forma logica
 exports.deleteUser = async (req, res) => {
   try {
-    //Se recibe el usuario y quien eliminó por la URL
-    const { username, deletedBy } = req.params;
+    const { username } = req.params;
+    const deletedBy = req.usuario.usuario;
 
     const usuario = await Usuario.findOne({ usuario: username, deleted: false });
 

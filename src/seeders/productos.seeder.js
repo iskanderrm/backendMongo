@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Producto = require('../models/productos.model'); 
+const Producto = require('../models/productos.model');
 require("dotenv").config();
 
 mongoose.connect(process.env.URL_MONGODB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -10,46 +10,86 @@ const productosData = [
     modelo: 'Modelo 1',
     marca: 'Marca 1',
     url_imagen: 'imagen1.jpg',
-    tipo_producto: { atributo1: 'Valor1', atributo2: 'Valor2' },
-    created_by: "admin"
+    categoria: 'Cascos',
+    talla: 'XL',
+    capacidad: null,
+    tipo_llanta: null,
+    rin: null,
+    medida: null,
+    descripcion: null,
+    compatibilidad: null,
+    color: null,
+    created_by: "Seeder"
   },
   {
     codigo: 'P1002',
     modelo: 'Modelo 2',
     marca: 'Marca 2',
     url_imagen: 'imagen2.jpg',
-    tipo_producto: { categoria: 'Maletas', atributo2: 'Valor4' },
-    created_by: "admin"
+    categoria: 'Maletas',
+    talla: null,
+    capacidad: '30L',
+    tipo_llanta: null,
+    rin: null,
+    medida: null,
+    descripcion: null,
+    compatibilidad: null,
+    color: null,
+    created_by: "Seeder"
   },
   {
     codigo: 'P1003',
     modelo: 'Modelo 3',
     marca: 'Marca 3',
     url_imagen: 'imagen3.jpg',
-    tipo_producto: { categoria: 'Maletas', atributo2: 'Valor6' },
-    created_by: "admin"
+    categoria: 'Llantas',
+    talla: null,
+    capacidad: null,
+    tipo_llanta: 'Deportivas',
+    rin: '17',
+    medida: '205/55R17',
+    descripcion: null,
+    compatibilidad: null,
+    color: null,
+    created_by: "Seeder"
   },
   {
     codigo: 'P1004',
     modelo: 'Modelo 4',
     marca: 'Marca 4',
     url_imagen: 'imagen4.jpg',
-    tipo_producto: { categoria: 'Cascos', atributo2: 'Valor8' },
-    created_by: "admin"
+    categoria: 'Accesorios',
+    talla: null,
+    capacidad: null,
+    tipo_llanta: null,
+    rin: null,
+    medida: null,
+    descripcion: 'Descripción del accesorio',
+    compatibilidad: 'Modelos X, Y, Z',
+    color: null,
+    created_by: "Seeder"
   },
   {
     codigo: 'P1005',
     modelo: 'Modelo 5',
     marca: 'Marca 5',
     url_imagen: 'imagen5.jpg',
-    tipo_producto: { categoria: 'Cascos', atributo2: 'Valor10' },
-    created_by: "admin",
+    categoria: 'Equipo Personal',
+    talla: 'M',
+    capacidad: null,
+    tipo_llanta: null,
+    rin: null,
+    medida: null,
+    descripcion: null,
+    compatibilidad: null,
+    color: 'Azul',
+    created_by: "Seeder",
   },
 ];
 
 async function seedProductos() {
   try {
-    await Producto.deleteMany(); 
+    await Producto.deleteMany();
 
     for (const producto of productosData) {
       const nuevoProducto = new Producto(producto);
@@ -60,7 +100,7 @@ async function seedProductos() {
   } catch (error) {
     console.error('Error al agregar datos de productos:', error);
   } finally {
-    mongoose.connection.close(); 
+    mongoose.connection.close();
   }
 }
 

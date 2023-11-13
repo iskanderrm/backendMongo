@@ -3,25 +3,58 @@ const fs = require("fs");
 
 const createProducto = async (req, res) => {
   try {
-    const { codigo, modelo, marca, tipo_producto, created_by } = req.body;
+    const { codigo, modelo, marca, categoria } = req.body;
     const url_imagen = req.file.filename;
+    const created_by = req.usuario.usuario;
 
     const existingProduct = await Producto.findOne({ codigo });
 
     if (existingProduct) {
-      res.status(400).json({ message: "Código de producto no disponible" });
-      return;
+      return res.status(400).json({ message: "Código de producto no disponible" });
     }
 
-    const nuevoProducto = new Producto({
+    let producto = {
       codigo,
       modelo,
       marca,
       url_imagen,
-      tipo_producto, // * Debe ser un objeto
+      categoria,
+      talla: null,
+      capacidad: null,
+      tipo_llanta: null,
+      rin: null,
+      medida: null,
+      descripcion: null,
+      compatibilidad: null,
+      color: null,
       created_by,
-    });
+    };
 
+    switch (categoria) {
+      case "cascos":
+        producto.talla = req.body.talla;
+        break;
+      case "maletas":
+        producto.capacidad = req.body.capacidad;
+        break;
+      case "llantas":
+        producto.tipo_llanta = req.body.tipo_llanta;
+        producto.rin = req.body.rin;
+        producto.medida = req.body.medida;
+        break;
+      case "accesorios":
+        producto.descripcion = req.body.descripcion;
+        producto.compatibilidad = req.body.compatibilidad;
+        break;
+      case "equipo personal":
+        producto.color = req.body.color;
+        producto.talla = req.body.talla;
+        break;
+      default:
+        return res.status(400).json({ message: "Categoría no válida" });
+    }
+
+    const nuevoProducto = new Producto(producto);
     await nuevoProducto.save();
 
     res.status(201).json({ message: "Producto agregado exitosamente" });
@@ -33,20 +66,51 @@ const createProducto = async (req, res) => {
 const updateProducto = async (req, res) => {
   try {
     const { codigo } = req.params;
-    const { modelo, marca, tipo_producto, updated_by } = req.body;
+    const { modelo, marca, categoria } = req.body;
+    const updated_by = req.usuario.usuario;
 
     const producto = await Producto.findOne({ codigo: codigo, deleted: false });
 
     if (!producto) {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
-    fs.unlinkSync(`public/${producto.url_imagen}`);
+
+    // Intentar eliminar el archivo
+    try {
+      fs.unlinkSync(`public/${producto.url_imagen}`);
+    } catch (error) {
+      console.error("Error al eliminar el archivo:", error);
+    }
 
     producto.modelo = modelo;
     producto.marca = marca;
-    producto.tipo_producto = tipo_producto;
+    producto.categoria = categoria;
     producto.updated_at = new Date();
     producto.updated_by = updated_by;
+
+    switch (categoria) {
+      case "Cascos":
+        producto.talla = req.body.talla;
+        break;
+      case "Maletas":
+        producto.capacidad = req.body.capacidad;
+        break;
+      case "Llantas":
+        producto.tipo_llanta = req.body.tipo_llanta;
+        producto.rin = req.body.rin;
+        producto.medida = req.body.medida;
+        break;
+      case "Accesorios":
+        producto.descripcion = req.body.descripcion;
+        producto.compatibilidad = req.body.compatibilidad;
+        break;
+      case "Equipo_personal":
+        producto.color = req.body.color;
+        producto.talla = req.body.talla;
+        break;
+      default:
+        return res.status(400).json({ message: "Categoría no válida" });
+    }
 
     if (req.file) {
       producto.url_imagen = req.file.filename;
@@ -56,7 +120,7 @@ const updateProducto = async (req, res) => {
 
     res.status(200).json({ message: "Producto actualizado exitosamente" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     res.status(500).json({ error: "Error al actualizar el producto" });
   }
@@ -74,7 +138,8 @@ const deleteProducto = async (req, res) => {
 
     producto.deleted = true;
     producto.deleted_at = new Date();
-    producto.deleted_by = req.body.deleted_by;
+    producto.deleted_by = req.usuario.usuario;
+
 
     await producto.save();
 
@@ -104,9 +169,9 @@ const getCategoria = async (req, res) => {
   try {
     const { categoria } = req.params;
 
-    const productos = await Producto.find({ 'tipo_producto.categoria': categoria, deleted: false });
+    const productos = await Producto.find({ categoria: categoria, deleted: false });
 
-    if (!productos) {
+    if (!productos || productos.length === 0) {
       return res.status(404).json({ error: "Productos no encontrados" });
     }
 
@@ -140,7 +205,7 @@ const getProductos = async (req, res) => {
       totalProductos,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: "Error al buscar los productos" });
   }
 };
