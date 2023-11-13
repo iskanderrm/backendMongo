@@ -50,17 +50,29 @@ exports.getUserByUsername = async (req, res) => {
   }
 };
 
-// Obtener todos los usuarios
 exports.getAllUsers = async (req, res) => {
   try {
-    const usuarios = await Usuario.find({ deleted: false });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
 
-    if (!usuarios || usuarios.length === 0) {
-      res.status(404).json({ error: 'Sin usuarios en existencia' });
-      return;
+    const skip = (page - 1) * limit;
+    const totalUsuarios = await Usuario.countDocuments({ deleted: false });
+    const totalPages = Math.ceil(totalUsuarios / limit);
+
+    if (page > totalPages) {
+      return res.status(404).json({ error: 'Página no encontrada' });
     }
 
-    res.status(200).json(usuarios);
+    const usuarios = await Usuario.find({ deleted: false })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      usuarios,
+      currentPage: page,
+      totalPages,
+      totalUsuarios,
+    });
   } catch (error) {
     res.status(500).json({ error: 'Error al buscar los usuarios' });
   }

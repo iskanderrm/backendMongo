@@ -91,18 +91,41 @@ const getPromocion = async (req, res) => {
 };
 
 const getPromociones = async (req, res) => {
-    try {
-      const promocion = await Promocion.find({ deleted: false });
-  
-      if (!promocion) {
-        return res.status(404).json({ error: 'No hay promociones guardadas.' });
-      }
-  
-      res.status(200).json(promocion);
-    } catch (error) {
-      res.status(500).json({ error: 'Error al buscar la promoción.' });
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const skip = (page - 1) * limit;
+    const totalPromociones = await Promocion.countDocuments({ deleted: false });
+    const totalPages = Math.ceil(totalPromociones / limit);
+
+    if (page > totalPages) {
+      return res.status(404).json({ error: 'Página no encontrada.' });
     }
-  };
+
+    const promociones = await Promocion.find({ deleted: false })
+      .skip(skip)
+      .limit(limit);
+
+    res.status(200).json({
+      promociones,
+      currentPage: page,
+      totalPages,
+      totalPromociones,
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al buscar las promociones.' });
+  }
+};
+
+module.exports = {
+  createPromocion,
+  updatePromocion,
+  deletePromocion,
+  getPromocion,
+  getPromociones,
+};
+
   
 
 module.exports = {
