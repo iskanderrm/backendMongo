@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const usuarioModel = require('../models/usuarios.model');
+const usuarioModel = require('../models/usuario.model');
 const jwtSecret = process.env.JWT_SECRET;
 
 const login = async (req, res) => {
@@ -23,7 +23,8 @@ const login = async (req, res) => {
 
         const payload = {
             usuario: {
-                usuario: usuarioEncontrado.usuario
+                usuario: usuarioEncontrado.usuario,
+                id: usuarioEncontrado._id
             }
         }
         const token = jwt.sign(payload, jwtSecret, {expiresIn: '2h'});

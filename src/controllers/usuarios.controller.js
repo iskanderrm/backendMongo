@@ -1,13 +1,12 @@
 const bcrypt = require('bcrypt');
-const Usuario = require('../models/usuarios.model'); 
+const Usuario = require('../models/usuario.model'); 
 const saltosBcrypt = parseInt(process.env.SALTOS_BCRYPT);
 
-//Creación de nuevos administradores
 exports.createUser = async (req, res) => {
   try {
     const { nombre, apellido, usuario, password } = req.body;
     const existingUser = await Usuario.findOne({ usuario });
-    const createdBy = req.usuario.usuario;
+    const createdBy = req.usuario.id;
     if (existingUser) {
       res.status(400).json({ message: 'Nombre de usuario no disponible' });
       return;
@@ -31,10 +30,8 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// Obtener el usuario por usuario.
 exports.getUserByUsername = async (req, res) => {
   try {
-    //Recibe el usuario en la URL
     const { username } = req.params;
 
     const usuario = await Usuario.findOne({ usuario: username });
@@ -78,13 +75,11 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-//Edición de usuario por medio de usuario.
 exports.updateUser = async (req, res) => {
   try {
-    //Por parametro en la URL se manda el usuario y lo que se va a actualizar se recibe del body.
     const { username } = req.params;
     const { nombre, apellido, password } = req.body;
-    const updatedBy = req.usuario.usuario;
+    const updatedBy = req.usuario.id;
 
     const usuario = await Usuario.findOne({ usuario: username, deleted: false });
 
@@ -115,7 +110,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const { username } = req.params;
-    const deletedBy = req.usuario.usuario;
+    const deletedBy = req.usuario.id;
 
     const usuario = await Usuario.findOne({ usuario: username, deleted: false });
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require("dotenv").config();
-const Promocion = require('../models/promociones.model'); 
+const Promocion = require('../models/promocion.model'); 
 
 mongoose.connect(process.env.URL_MONGODB, { useNewUrlParser: true, useUnifiedTopology: true });
 

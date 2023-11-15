@@ -1,11 +1,11 @@
-const Producto = require("../models/productos.model");
+const Producto = require("../models/producto.model");
 const fs = require("fs");
 
 const createProducto = async (req, res) => {
   try {
     const { codigo, modelo, marca, categoria } = req.body;
     const url_imagen = req.file.filename;
-    const created_by = req.usuario.usuario;
+    const created_by = req.usuario.id;
 
     const existingProduct = await Producto.findOne({ codigo });
 
@@ -19,14 +19,6 @@ const createProducto = async (req, res) => {
       marca,
       url_imagen,
       categoria,
-      talla: null,
-      capacidad: null,
-      tipo_llanta: null,
-      rin: null,
-      medida: null,
-      descripcion: null,
-      compatibilidad: null,
-      color: null,
       created_by,
     };
 
@@ -46,7 +38,7 @@ const createProducto = async (req, res) => {
         producto.descripcion = req.body.descripcion;
         producto.compatibilidad = req.body.compatibilidad;
         break;
-      case "equipo personal":
+      case "equipo_personal":
         producto.color = req.body.color;
         producto.talla = req.body.talla;
         break;
@@ -67,7 +59,7 @@ const updateProducto = async (req, res) => {
   try {
     const { codigo } = req.params;
     const { modelo, marca, categoria } = req.body;
-    const updated_by = req.usuario.usuario;
+    const updated_by = req.usuario.id;
 
     const producto = await Producto.findOne({ codigo: codigo, deleted: false });
 
@@ -75,9 +67,8 @@ const updateProducto = async (req, res) => {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
 
-    // Intentar eliminar el archivo
     try {
-      fs.unlinkSync(`public/${producto.url_imagen}`);
+      fs.unlinkSync(`public/images/${producto.url_imagen}`);
     } catch (error) {
       console.error("Error al eliminar el archivo:", error);
     }
@@ -89,22 +80,22 @@ const updateProducto = async (req, res) => {
     producto.updated_by = updated_by;
 
     switch (categoria) {
-      case "Cascos":
+      case "cascos":
         producto.talla = req.body.talla;
         break;
-      case "Maletas":
+      case "maletas":
         producto.capacidad = req.body.capacidad;
         break;
-      case "Llantas":
+      case "llantas":
         producto.tipo_llanta = req.body.tipo_llanta;
         producto.rin = req.body.rin;
         producto.medida = req.body.medida;
         break;
-      case "Accesorios":
+      case "accesorios":
         producto.descripcion = req.body.descripcion;
         producto.compatibilidad = req.body.compatibilidad;
         break;
-      case "Equipo_personal":
+      case "equipo_personal":
         producto.color = req.body.color;
         producto.talla = req.body.talla;
         break;
@@ -138,7 +129,7 @@ const deleteProducto = async (req, res) => {
 
     producto.deleted = true;
     producto.deleted_at = new Date();
-    producto.deleted_by = req.usuario.usuario;
+    producto.deleted_by = req.usuario.id;
 
 
     await producto.save();

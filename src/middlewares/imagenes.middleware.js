@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public'); // Directorio de destino de las imágenes
+    cb(null, 'public/images'); // Directorio de destino de las imágenes
   },
   filename: (req, file, cb) => {
     const extension = path.extname(file.originalname);

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Producto = require('../models/productos.model');
+const Producto = require('../models/producto.model');
 require("dotenv").config();
 
 mongoose.connect(process.env.URL_MONGODB, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -74,7 +74,7 @@ const productosData = [
     modelo: 'Modelo 5',
     marca: 'Marca 5',
     url_imagen: 'imagen5.jpg',
-    categoria: 'Equipo Personal',
+    categoria: 'Equipo_personal',
     talla: 'M',
     capacidad: null,
     tipo_llanta: null,

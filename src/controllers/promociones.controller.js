@@ -1,4 +1,4 @@
-const Promocion = require('../models/promociones.model');
+const Promocion = require('../models/promocion.model');
 const fs = require('fs');
 
 const createPromocion = async (req, res) => {
@@ -6,7 +6,7 @@ const createPromocion = async (req, res) => {
     const { id_nombre_promocion } = req.body;
     const url_imagen_promocion = req.file.filename; 
     const existigPromotion = await Promocion.findOne({ id_nombre_promocion });
-    const created_by = req.usuario.usuario;
+    const created_by = req.usuario.id;
     if (existigPromotion) {
       res.status(400).json({ message: 'ID de la promoción no disponible' });
       return;
@@ -29,7 +29,6 @@ const createPromocion = async (req, res) => {
 const updatePromocion = async (req, res) => {
   try {
     const { id_nombre_promocion } = req.params;
-    const { updated_by } = req.usuario.usuario;
     
 
     const promocion = await Promocion.findOne({ id_nombre_promocion, deleted: false });
@@ -37,12 +36,12 @@ const updatePromocion = async (req, res) => {
     if (!promocion) {
       return res.status(404).json({ error: 'Promoción no encontrada.' });
     }
-    fs.unlinkSync(`public/${promocion.url_imagen_promocion}`);
+    fs.unlinkSync(`public/images/${promocion.url_imagen_promocion}`);
 
 
     promocion.url_imagen_promocion = req.file.filename;
     promocion.updated_at = new Date();
-    promocion.updated_by = updated_by;
+    promocion.updated_by = req.usuario.id;
 
     await promocion.save();
 
@@ -55,7 +54,7 @@ const updatePromocion = async (req, res) => {
 const deletePromocion = async (req, res) => {
   try {
     const { id_nombre_promocion } = req.params;
-    const deleted_by = req.usuario.usuario;
+    const deleted_by = req.usuario.id;
     const promocion = await Promocion.findOne({ id_nombre_promocion, deleted: false });
 
     if (!promocion) {

@@ -3,6 +3,8 @@ require("./src/configs/db.config");
 
 const express = require("express");
 const app = express();
+const path = require('path');
+
 //  TODO: Importar archivos de rutas
 const usuariosRouter = require('./src/routes/usuarios.route');
 const authRouter = require('./src/routes/auth.route');
@@ -10,6 +12,7 @@ const promocionesRouter = require('./src/routes/promociones.route');
 const productosRouter = require('./src/routes/productos.route')
 
 app.use(express.json());
+app.use('/public', express.static(path.join(__dirname, '/public')));
 
 //  TODO: Ruta de ejemplo
 app.use('/usuarios', usuariosRouter);
