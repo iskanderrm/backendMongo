@@ -3,7 +3,13 @@ const socketIo = require('socket.io');
 let io;
 
 function initializeSocket(server) {
-  io = socketIo(server);
+  io = socketIo(server, {
+    cors: {
+      origin: "http://localhost:3000", // Permite solicitudes solo desde este origen
+      methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
+      credentials: true
+    }
+  });
 
   io.on('connection', (socket) => {
     console.log('Nuevo cliente conectado');

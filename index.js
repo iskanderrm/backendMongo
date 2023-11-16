@@ -11,6 +11,16 @@ const http = require('http');
 const socketConfig = require('./src/configs/socket.config');
 const server = http.createServer(app);
 const io = socketConfig.initializeSocket(server);
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+// Antes de tus rutas
+app.options('*', cors());
+
 
 //  TODO: Importar archivos de rutas
 const usuariosRouter = require('./src/routes/usuarios.route');
@@ -19,7 +29,6 @@ const promocionesRouter = require('./src/routes/promociones.route');
 const productosRouter = require('./src/routes/productos.route');
 
 app.use(express.json());
-app.use(cors());
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
 app.set("io", io);
