@@ -1,5 +1,7 @@
 const Promocion = require('../models/promocion.model');
 const fs = require('fs');
+const socket = require("../configs/socket.config");
+const io = socket.getIo()
 
 const createPromocion = async (req, res) => {
   try {
@@ -16,8 +18,11 @@ const createPromocion = async (req, res) => {
       url_imagen_promocion,
       created_by,
     });
+    await io.emit('promocionCreada', { promocion });
 
     await promocion.save();
+
+
 
     res.status(201).json({message: "Promociones agregada exitosamente"});
   } catch (error) {
@@ -44,7 +49,7 @@ const updatePromocion = async (req, res) => {
     promocion.updated_by = req.usuario.id;
 
     await promocion.save();
-
+    await io.emit('promocionActualizada', { promocion });
     res.status(200).json({message: "Promoción actualizada correctamente"});
   } catch (error) {
     res.status(500).json({ error: 'Error al actualizar la promoción.' });
@@ -66,6 +71,7 @@ const deletePromocion = async (req, res) => {
     promocion.deleted_by = deleted_by;
 
     await promocion.save();
+    await io.emit('promocionEliminada', { promocion });
 
     res.status(200).json({ message: "Promoción eliminada exitosamente."});
   } catch (error) {

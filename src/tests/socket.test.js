@@ -14,4 +14,16 @@ socket.on('connect', () => {
   socket.on('productoEliminado', (data) => {
     console.log('Producto eliminado:', data.producto);
   });
+
+  socket.on('promocionCreada', (data) => {
+    console.log('Nueva promocion creada:', data.promocion);
+  });
+
+  socket.on('promocionActualizada', (data) => {
+    console.log('Promoción actualizada:', data.promocion);
+  });
+
+  socket.on('promocionEliminada', (data) => {
+    console.log('Promoción eliminada:', data.promocion);
+  });
 });
