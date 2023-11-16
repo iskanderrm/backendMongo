@@ -1,5 +1,7 @@
 const Producto = require("../models/producto.model");
 const fs = require("fs");
+const socket = require("../configs/socket.config");
+const io = socket.getIo()
 
 const createProducto = async (req, res) => {
   try {
@@ -48,9 +50,12 @@ const createProducto = async (req, res) => {
 
     const nuevoProducto = new Producto(producto);
     await nuevoProducto.save();
+    await io.emit('productoCreado', { nuevoProducto });
+
 
     res.status(201).json({ message: "Producto agregado exitosamente" });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "Error al crear el producto" });
   }
 };
@@ -108,6 +113,8 @@ const updateProducto = async (req, res) => {
     }
 
     await producto.save();
+    await io.emit('productoActualizado', { producto });
+
 
     res.status(200).json({ message: "Producto actualizado exitosamente" });
   } catch (error) {
@@ -134,6 +141,7 @@ const deleteProducto = async (req, res) => {
 
     await producto.save();
 
+    await io.emit('productoEliminado', { producto });
     res.status(200).json({ message: "Producto eliminado" });
   } catch (error) {
     res.status(500).json({ error: "Error al eliminar el producto" });

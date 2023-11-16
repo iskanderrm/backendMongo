@@ -4,24 +4,33 @@ require("./src/configs/db.config");
 const express = require("express");
 const app = express();
 const path = require('path');
+const cors = require('cors');
+
+
+const http = require('http');
+const socketConfig = require('./src/configs/socket.config');
+const server = http.createServer(app);
+const io = socketConfig.initializeSocket(server);
 
 //  TODO: Importar archivos de rutas
 const usuariosRouter = require('./src/routes/usuarios.route');
 const authRouter = require('./src/routes/auth.route');
 const promocionesRouter = require('./src/routes/promociones.route');
-const productosRouter = require('./src/routes/productos.route')
+const productosRouter = require('./src/routes/productos.route');
 
 app.use(express.json());
+app.use(cors());
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
-//  TODO: Ruta de ejemplo
+app.set("io", io);
+
+//  TODO: Rutas de ejemplo
 app.use('/usuarios', usuariosRouter);
 app.use('/auth', authRouter);
 app.use('/promociones', promocionesRouter);
 app.use('/productos', productosRouter);
 
-
 const PORT = process.env.PORT;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("API escuchando en el puerto " + PORT);
 });
