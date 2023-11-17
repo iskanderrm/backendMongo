@@ -184,6 +184,11 @@ const getProductos = async (req, res) => {
   try {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
+    let codigo = req.query.codigo;
+
+    if(!codigo){
+      codigo = "";
+    }
 
     const skip = (page - 1) * limit;
     const totalProductos = await Producto.countDocuments({ deleted: false });
@@ -193,9 +198,10 @@ const getProductos = async (req, res) => {
       return res.status(404).json({ error: "Página no encontrada" });
     }
 
-    const productos = await Producto.find({ deleted: false })
+    const productos = await Producto.find({ deleted: false, codigo: { $regex: codigo, $options: 'i' } })
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .sort({ codigo: 1 });
 
     res.status(200).json({
       productos,
@@ -209,11 +215,28 @@ const getProductos = async (req, res) => {
   }
 };
 
+const buscarPorCodigo = async (req, res) => {
+  try {
+    const { codigo } = req.params;
+
+    const regex = new RegExp(codigo, 'i');
+
+    const productos = await Producto.find({ codigo: regex });
+
+    res.json({ productos });
+  } catch (error) {
+    console.error('Error al buscar productos por código:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+
 module.exports = {
   createProducto,
   updateProducto,
   deleteProducto,
   getProducto,
   getProductos,
-  getCategoria
+  getCategoria,
+  buscarPorCodigo
 };

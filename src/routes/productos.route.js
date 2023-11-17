@@ -9,7 +9,8 @@ const {
   deleteProducto,
   getProducto,
   getProductos,
-  getCategoria
+  getCategoria,
+  buscarPorCodigo
 } = require('../controllers/productos.controller'); 
 
 router.post('/', authMiddleware.verificarJWT, multerMiddleware.single('imagen'), createProducto);
@@ -19,6 +20,8 @@ router.put('/:codigo', authMiddleware.verificarJWT, multerMiddleware.single('ima
 router.delete('/:codigo', authMiddleware.verificarJWT, deleteProducto);
 
 router.get('/:codigo', authMiddleware.verificarJWT, getProducto);
+router.get('/buscar/:codigo', authMiddleware.verificarJWT, buscarPorCodigo);
+
 router.get('/', getProductos);
 router.get('/categorias/:categoria', getCategoria);
 

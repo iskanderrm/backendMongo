@@ -111,7 +111,8 @@ const getPromociones = async (req, res) => {
 
     const promociones = await Promocion.find({ deleted: false })
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .sort({ codigo: 1 });
 
     res.status(200).json({
       promociones,
