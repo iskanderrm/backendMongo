@@ -27,7 +27,7 @@ const login = async (req, res) => {
                 id: usuarioEncontrado._id
             }
         }
-        const token = jwt.sign(payload, jwtSecret, {expiresIn: '2h'});
+        const token = jwt.sign(payload, jwtSecret, {expiresIn: '8h'});
 
         return res.status(200).json({
             message: "Acceso correcto",

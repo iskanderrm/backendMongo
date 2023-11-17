@@ -52,6 +52,7 @@ const updatePromocion = async (req, res) => {
     await io.emit('promocionActualizada', { promocion });
     res.status(200).json({message: "Promoción actualizada correctamente"});
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Error al actualizar la promoción.' });
   }
 };
