@@ -53,7 +53,7 @@ const createProducto = async (req, res) => {
     await io.emit('productoCreado', { nuevoProducto });
 
 
-    res.status(201).json({ message: "Producto agregado exitosamente" });
+    res.status(201).json({ message: "Producto agregado exitosamente." });
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: "Error al crear el producto" });
@@ -63,7 +63,7 @@ const createProducto = async (req, res) => {
 const updateProducto = async (req, res) => {
   try {
     const { codigo } = req.params;
-    const { modelo, marca, categoria } = req.body;
+    const { codigoEditado,modelo, marca, categoria, editarImagen } = req.body;
     const updated_by = req.usuario.id;
 
     const producto = await Producto.findOne({ codigo: codigo, deleted: false });
@@ -72,12 +72,15 @@ const updateProducto = async (req, res) => {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
 
-    try {
-      fs.unlinkSync(`public/images/${producto.url_imagen}`);
-    } catch (error) {
-      console.error("Error al eliminar el archivo:", error);
+    if (editarImagen){
+      try {
+        fs.unlinkSync(`public/images/${producto.url_imagen}`);
+      } catch (error) {
+        console.error("Error al eliminar el archivo:", error);
+      }
     }
 
+    producto.codigo = codigoEditado;
     producto.modelo = modelo;
     producto.marca = marca;
     producto.categoria = categoria;
