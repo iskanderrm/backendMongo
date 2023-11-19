@@ -18,7 +18,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Antes de tus rutas
 app.options('*', cors());
 
 

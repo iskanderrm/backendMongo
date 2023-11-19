@@ -170,14 +170,32 @@ const getProducto = async (req, res) => {
 const getCategoria = async (req, res) => {
   try {
     const { categoria } = req.params;
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
 
-    const productos = await Producto.find({ categoria: categoria, deleted: false });
+    const skip = (page - 1) * limit;
+    const totalProductos = await Producto.countDocuments({ categoria: categoria, deleted: false });
+    const totalPages = Math.ceil(totalProductos / limit);
+
+    if (page > totalPages) {
+      return res.status(404).json({ error: "Página no encontrada" });
+    }
+    
+    const productos = await Producto.find({ categoria: categoria, deleted: false })
+    .skip(skip)
+    .limit(limit)
+    .sort({ codigo: 1 });;
 
     if (!productos || productos.length === 0) {
       return res.status(404).json({ error: "Productos no encontrados" });
     }
-
-    res.status(200).json(productos);
+    
+    res.status(200).json({
+      productos,
+      currentPage: page,
+      totalPages,
+      totalProductos,
+    });
   } catch (error) {
     res.status(500).json({ error: "Error al buscar los productos" });
   }
