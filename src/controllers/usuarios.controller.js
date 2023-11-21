@@ -1,8 +1,11 @@
 const bcrypt = require('bcrypt');
 const Usuario = require('../models/usuario.model'); 
 const saltosBcrypt = parseInt(process.env.SALTOS_BCRYPT);
+const mongoose = require("mongoose");
 
 exports.createUser = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { nombre, apellido, usuario, password } = req.body;
     const existingUser = await Usuario.findOne({ usuario });
@@ -22,10 +25,13 @@ exports.createUser = async (req, res) => {
     });
 
     await nuevoUsuario.save();
+    await session.commitTransaction();
+    session.endSession();
 
     res.status(201).json({message: "Usuario creado exitosamente"});
   } catch (error) {
-    console.error('Error al crear el usuario', error);  
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ message: 'Error al crear el usuario', error: error });
   }
 };
@@ -76,6 +82,8 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { username } = req.params;
     const { nombre, apellido, password } = req.body;
@@ -99,15 +107,20 @@ exports.updateUser = async (req, res) => {
     usuario.updated_by = updatedBy;
 
     await usuario.save();
+    await session.commitTransaction();
+    session.endSession();
 
     res.status(200).json({ message: "Usuario actualizado exitosamente."});
   } catch (error) {
-    console.log(error)
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: 'Error al actualizar el usuario' });
   }
 };
 
 exports.deleteUser = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { username } = req.params;
     const deletedBy = req.usuario.id;
@@ -124,9 +137,13 @@ exports.deleteUser = async (req, res) => {
     usuario.deleted_by = deletedBy; 
 
     await usuario.save();
+    await session.commitTransaction();
+    session.endSession();
 
     res.status(200).json({ message: "Usuario eliminado exitosamente" });
   } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: 'Error al eliminar el usuario' });
   }
 };

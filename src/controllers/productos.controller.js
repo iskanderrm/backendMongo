@@ -2,8 +2,11 @@ const Producto = require("../models/producto.model");
 const fs = require("fs");
 const socket = require("../configs/socket.config");
 const io = socket.getIo()
+const mongoose = require("mongoose");
 
 const createProducto = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { codigo, modelo, marca, categoria } = req.body;
     const url_imagen = req.file.filename;
@@ -51,16 +54,20 @@ const createProducto = async (req, res) => {
     const nuevoProducto = new Producto(producto);
     await nuevoProducto.save();
     await io.emit('productoCreado', { nuevoProducto });
-
+    await session.commitTransaction();
+    session.endSession();
 
     res.status(201).json({ message: "Producto agregado exitosamente." });
   } catch (error) {
-    console.log(error)
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: "Error al crear el producto" });
   }
 };
 
 const updateProducto = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { codigo } = req.params;
     const { codigoEditado,modelo, marca, categoria, editarImagen } = req.body;
@@ -74,7 +81,6 @@ const updateProducto = async (req, res) => {
 
     if (editarImagen){
       try {
-        fs.unlinkSync(`public/images/${producto.url_imagen}`);
       } catch (error) {
         console.error("Error al eliminar el archivo:", error);
       }
@@ -112,22 +118,27 @@ const updateProducto = async (req, res) => {
     }
 
     if (req.file) {
+      fs.unlinkSync(`public/images/${producto.url_imagen}`);
       producto.url_imagen = req.file.filename;
     }
 
     await producto.save();
-    await io.emit('productoActualizado', { producto });
-
+    await io.emit('productoActualizado', { producto, codigo });
+    await session.commitTransaction();
+    session.endSession();
 
     res.status(200).json({ message: "Producto actualizado exitosamente" });
   } catch (error) {
-    console.error(error);
-
+    console.log(error)
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: "Error al actualizar el producto" });
   }
 };
 
 const deleteProducto = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { codigo } = req.params;
 
@@ -145,8 +156,13 @@ const deleteProducto = async (req, res) => {
     await producto.save();
 
     await io.emit('productoEliminado', { producto });
+    await session.commitTransaction();
+    session.endSession();
+
     res.status(200).json({ message: "Producto eliminado" });
   } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: "Error al eliminar el producto" });
   }
 };

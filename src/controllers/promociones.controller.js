@@ -1,9 +1,12 @@
 const Promocion = require('../models/promocion.model');
 const fs = require('fs');
+const mongoose = require("mongoose");
 const socket = require("../configs/socket.config");
 const io = socket.getIo()
 
 const createPromocion = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { id_nombre_promocion } = req.body;
     const url_imagen_promocion = req.file.filename; 
@@ -22,16 +25,19 @@ const createPromocion = async (req, res) => {
 
     await promocion.save();
 
-
-
+    await session.commitTransaction();
+    session.endSession();
     res.status(201).json({message: "Promociones agregada exitosamente"});
   } catch (error) {
-    console.log(error)
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: 'Error al crear la promociones.' });
   }
 };
 
 const updatePromocion = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { id_nombre_promocion } = req.params;
     
@@ -50,14 +56,19 @@ const updatePromocion = async (req, res) => {
 
     await promocion.save();
     await io.emit('promocionActualizada', { promocion });
+    await session.commitTransaction();
+    session.endSession();
     res.status(200).json({message: "Promoción actualizada correctamente"});
   } catch (error) {
-    console.log(error)
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: 'Error al actualizar la promoción.' });
   }
 };
 
 const deletePromocion = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { id_nombre_promocion } = req.params;
     const deleted_by = req.usuario.id;
@@ -73,10 +84,12 @@ const deletePromocion = async (req, res) => {
 
     await promocion.save();
     await io.emit('promocionEliminada', { promocion });
-
+    await session.commitTransaction();
+    session.endSession();
     res.status(200).json({ message: "Promoción eliminada exitosamente."});
   } catch (error) {
-    console.log(error)
+    await session.abortTransaction();
+    session.endSession();
     res.status(500).json({ error: 'Error al eliminar la promoción.' });
   }
 };

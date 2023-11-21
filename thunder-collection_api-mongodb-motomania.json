@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "api-mongodb-motomania",
-    "dateExported": "2023-11-19T16:33:00.369Z",
+    "dateExported": "2023-11-21T05:13:00.651Z",
     "version": "1.1",
     "folders": [
         {
@@ -43,17 +43,17 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-10-28T15:36:12.021Z",
-            "modified": "2023-11-17T05:17:18.389Z",
+            "modified": "2023-11-21T05:08:50.935Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMyIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMxIn0sImlhdCI6MTcwMDE5NzkyMCwiZXhwIjoxNzAwMjI2NzIwfQ.9vhi5FEbFuSvsNG3wc9dqsUBH-xxkM7rmufQCMNQyIM"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nombre\": \"NombrePrueba12\",\n  \"apellido\": \"ApellidoPrueba\",\n  \"usuario\": \"prueba348\",\n  \"password\": \"prueba\"\n}",
+                "raw": "{\n  \"nombre\": \"Eugenio\",\n  \"apellido\": \"Gordillo\",\n  \"usuario\": \"keno1\",\n  \"password\": \"keno\"\n}",
                 "form": []
             },
             "tests": []
@@ -63,15 +63,15 @@
             "colId": "4c07eae9-c954-4b7a-9f96-6ea1352ec29c",
             "containerId": "02dcf53c-ec26-469d-9efa-c149418b916c",
             "name": "obtener",
-            "url": "http://localhost:8081/usuarios/prueba34",
+            "url": "http://localhost:8081/usuarios/keno",
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-10-28T16:45:26.860Z",
-            "modified": "2023-11-16T15:04:02.791Z",
+            "modified": "2023-11-21T04:55:16.717Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDE0Njk5MCwiZXhwIjoxNzAwMTU0MTkwfQ.-sYaEzMz_nCxSLKWG7Wzc8WR5J5LAhAO5aPf32jBHqE"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -82,15 +82,15 @@
             "colId": "4c07eae9-c954-4b7a-9f96-6ea1352ec29c",
             "containerId": "02dcf53c-ec26-469d-9efa-c149418b916c",
             "name": "delete",
-            "url": "http://localhost:8081/usuarios/prueba3",
+            "url": "http://localhost:8081/usuarios/keno1",
             "method": "DELETE",
             "sortNum": 30000,
             "created": "2023-10-28T17:05:27.543Z",
-            "modified": "2023-11-15T03:23:55.751Z",
+            "modified": "2023-11-21T05:09:39.552Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDM4NjgzMTJlYjg4MDU3ZmY2YjU2In0sImlhdCI6MTcwMDAxODM0MSwiZXhwIjoxNzAwMDI1NTQxfQ.ThryFogD6Q1omllSSYzFJzHyRL-JmqQNGvGWyPO5yEU"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -105,11 +105,11 @@
             "method": "GET",
             "sortNum": 40000,
             "created": "2023-10-28T17:17:41.656Z",
-            "modified": "2023-11-16T15:05:32.033Z",
+            "modified": "2023-11-21T04:54:28.621Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDE0Njk5MCwiZXhwIjoxNzAwMTU0MTkwfQ.-sYaEzMz_nCxSLKWG7Wzc8WR5J5LAhAO5aPf32jBHqE"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [
@@ -131,15 +131,15 @@
             "colId": "4c07eae9-c954-4b7a-9f96-6ea1352ec29c",
             "containerId": "02dcf53c-ec26-469d-9efa-c149418b916c",
             "name": "actualizar",
-            "url": "http://localhost:8081/usuarios/prueba3",
+            "url": "http://localhost:8081/usuarios/keno1",
             "method": "PUT",
             "sortNum": 50000,
             "created": "2023-10-28T17:25:30.491Z",
-            "modified": "2023-11-15T03:21:42.498Z",
+            "modified": "2023-11-21T05:09:17.368Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDM4NjgzMTJlYjg4MDU3ZmY2YjU2In0sImlhdCI6MTcwMDAxODM0MSwiZXhwIjoxNzAwMDI1NTQxfQ.ThryFogD6Q1omllSSYzFJzHyRL-JmqQNGvGWyPO5yEU"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -178,11 +178,11 @@
             "method": "POST",
             "sortNum": 70000,
             "created": "2023-10-28T20:59:39.063Z",
-            "modified": "2023-11-16T14:28:49.816Z",
+            "modified": "2023-11-21T04:57:11.954Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDE0NDg5NywiZXhwIjoxNzAwMTUyMDk3fQ.yBU2GeVcRoTZEtA0W6z5h9KJh7Y-r0dniqpUSihWP6k"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -192,7 +192,7 @@
                 "form": [
                     {
                         "name": "id_nombre_promocion",
-                        "value": "pruebaProm"
+                        "value": "kov"
                     }
                 ],
                 "files": [
@@ -253,15 +253,15 @@
             "colId": "4c07eae9-c954-4b7a-9f96-6ea1352ec29c",
             "containerId": "1aa52a4a-56a5-4e33-b431-640b6ee0a5e0",
             "name": "actualizar",
-            "url": "http://localhost:8081/promociones/prueba10",
+            "url": "http://localhost:8081/promociones/kov",
             "method": "PUT",
             "sortNum": 110000,
             "created": "2023-10-28T21:50:54.876Z",
-            "modified": "2023-11-16T07:49:04.529Z",
+            "modified": "2023-11-21T04:57:32.179Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDExNjkwNCwiZXhwIjoxNzAwMTI0MTA0fQ.nxrptkpi2ZrQvDIEZiGwMRvwmVwfAS_xHCXjbfjNnWA"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -283,15 +283,15 @@
             "colId": "4c07eae9-c954-4b7a-9f96-6ea1352ec29c",
             "containerId": "1aa52a4a-56a5-4e33-b431-640b6ee0a5e0",
             "name": "eliminar",
-            "url": "http://localhost:8081/promociones/Promocion5",
+            "url": "http://localhost:8081/promociones/kov",
             "method": "DELETE",
             "sortNum": 120000,
             "created": "2023-10-29T00:51:41.911Z",
-            "modified": "2023-11-16T07:23:43.963Z",
+            "modified": "2023-11-21T04:57:40.963Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDExOTM4NiwiZXhwIjoxNzAwMTI2NTg2fQ.8DgtsIU3oTShPhvScediiUO9hnvXT5uvARWMGAQgIdQ"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -306,11 +306,11 @@
             "method": "POST",
             "sortNum": 130000,
             "created": "2023-10-29T16:14:29.237Z",
-            "modified": "2023-11-16T07:36:29.779Z",
+            "modified": "2023-11-21T04:57:54.687Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDEyMDA1MiwiZXhwIjoxNzAwMTI3MjUyfQ.24CYUVtYbRp5CzhhLrxMufdFoz7URCtScZOmNrpndYU"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -320,7 +320,7 @@
                 "form": [
                     {
                         "name": "codigo",
-                        "value": "8058"
+                        "value": "8058121"
                     },
                     {
                         "name": "modelo",
@@ -376,15 +376,15 @@
             "colId": "4c07eae9-c954-4b7a-9f96-6ea1352ec29c",
             "containerId": "e1671b6a-8551-41af-939d-48fa9404dd10",
             "name": "update",
-            "url": "http://localhost:8081/productos/805",
+            "url": "http://localhost:8081/productos/8058121",
             "method": "PUT",
             "sortNum": 150000,
             "created": "2023-10-29T17:10:02.473Z",
-            "modified": "2023-11-16T06:12:34.907Z",
+            "modified": "2023-11-21T05:01:00.615Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDExMTQ4MywiZXhwIjoxNzAwMTE4NjgzfQ.6lJhgLIE8b2LdilGp-7vTz4GbZR7TffAntRpbivax8Y"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
@@ -407,6 +407,10 @@
                     {
                         "name": "talla",
                         "value": "XS"
+                    },
+                    {
+                        "name": "codigoEditado",
+                        "value": "223194"
                     }
                 ],
                 "files": [
@@ -448,15 +452,15 @@
             "colId": "4c07eae9-c954-4b7a-9f96-6ea1352ec29c",
             "containerId": "e1671b6a-8551-41af-939d-48fa9404dd10",
             "name": "delete",
-            "url": "http://localhost:8081/productos/805",
+            "url": "http://localhost:8081/productos/223194",
             "method": "DELETE",
             "sortNum": 170000,
             "created": "2023-10-29T17:24:23.364Z",
-            "modified": "2023-11-16T06:27:27.625Z",
+            "modified": "2023-11-21T05:01:17.291Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDExMTQ4MywiZXhwIjoxNzAwMTE4NjgzfQ.6lJhgLIE8b2LdilGp-7vTz4GbZR7TffAntRpbivax8Y"
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InVzdWFyaW8iOiJ1c3VhcmlvMiIsImlkIjoiNjU1NDNlYTNiNGMzZmIxMWQ4YzBhZWMwIn0sImlhdCI6MTcwMDU0MjQzMCwiZXhwIjoxNzAwNTcxMjMwfQ.Nczz2RQBdkQJ4ILfmRRduBHnhiEFWEFeLOkadVdaR_g"
                 }
             ],
             "params": [],
