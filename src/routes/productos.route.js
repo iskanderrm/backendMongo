@@ -10,7 +10,8 @@ const {
   getProducto,
   getProductos,
   getCategoria,
-  buscarPorCodigo
+  buscarPorCodigo,
+  getCascosPorTalla
 } = require('../controllers/productos.controller'); 
 
 router.post('/', authMiddleware.verificarJWT, multerMiddleware.single('imagen'), createProducto);
@@ -24,6 +25,9 @@ router.get('/buscar/:codigo', authMiddleware.verificarJWT, buscarPorCodigo);
 
 router.get('/', getProductos);
 router.get('/categorias/:categoria', getCategoria);
+
+router.get('/search/cascos', getCascosPorTalla);
+
 
 
 

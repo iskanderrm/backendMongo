@@ -267,6 +267,43 @@ const buscarPorCodigo = async (req, res) => {
   }
 };
 
+const getCascosPorTalla = async (req, res) => {
+  try {
+    const { categoria } = req.params;
+    const page = parseInt(req.query.page);
+    const limit = 4;
+
+    const totalProductos = await Producto.countDocuments({ deleted: false, categoria: 'cascos' });
+    const totalPages = Math.ceil(totalProductos / 24);
+
+    const tallas = ["XS", "S", "M", "L", "XL", "XXL"];
+    const resultadosPorTalla = {};
+
+    for (const talla of tallas) {
+      const skip = (page - 1) * limit;
+      const productos = await Producto.find({
+        categoria: "cascos",
+        talla: talla,
+        deleted: false,
+      })
+        .skip(skip)
+        .limit(limit)
+        .sort({ codigo: 1 });
+
+      resultadosPorTalla[talla] = {
+        productos,
+        talla: talla,
+      };
+    }
+
+    res.status(200).json({ resultadosPorTalla, totalProductos, totalPages });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al buscar los cascos" });
+  }
+};
+
+
 
 module.exports = {
   createProducto,
@@ -275,5 +312,6 @@ module.exports = {
   getProducto,
   getProductos,
   getCategoria,
-  buscarPorCodigo
+  buscarPorCodigo,
+  getCascosPorTalla
 };
