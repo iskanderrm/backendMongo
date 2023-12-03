@@ -4,6 +4,7 @@ mongoose
   .connect(process.env.URL_MONGODB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    authSource: process.env.DB_NAME
   })
   .then(() => {
     console.log('Conectado a MongoDB');
