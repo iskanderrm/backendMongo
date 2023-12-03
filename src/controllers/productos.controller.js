@@ -50,7 +50,7 @@ const createProducto = async (req, res) => {
       default:
         return res.status(400).json({ message: "Categoría no válida" });
     }
-
+     console.log(producto)
     const nuevoProducto = new Producto(producto);
     await nuevoProducto.save();
     await io.emit('productoCreado', { nuevoProducto });

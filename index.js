@@ -2,6 +2,7 @@ require("dotenv").config();
 require("./src/configs/db.config");
 
 const express = require("express");
+// const moveDeletedProducts  = require('./src/triggers/onDeletedProducts.trigger');
 const app = express();
 const path = require('path');
 const cors = require('cors');
@@ -21,6 +22,7 @@ app.use(cors({
 app.options('*', cors());
 
 
+
 //  TODO: Importar archivos de rutas
 const usuariosRouter = require('./src/routes/usuarios.route');
 const authRouter = require('./src/routes/auth.route');
@@ -37,6 +39,7 @@ app.use('/usuarios', usuariosRouter);
 app.use('/auth', authRouter);
 app.use('/promociones', promocionesRouter);
 app.use('/productos', productosRouter);
+// moveDeletedProducts().catch(console.error);
 
 const PORT = process.env.PORT;
 server.listen(PORT, () => {

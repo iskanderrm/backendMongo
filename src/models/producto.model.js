@@ -27,6 +27,7 @@ const productosSchema = mongoose.Schema({
         required: true,
         default: null,
       },
+      
       talla: {
         type: String,
         required: false,
@@ -66,7 +67,7 @@ const productosSchema = mongoose.Schema({
         type: String,
         required: false,
         default: null,
-      },
+      }, 
       //---
       created_at: {
         type: Date,
